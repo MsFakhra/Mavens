@@ -1,0 +1,943 @@
+Role matrices consist of vectors:
+mcf makes the selection of the specific combination functions  
+The entries of this vector can be any numbers from 1 to 35, as the library currently has 35 basic combination functions. For an overview of the library, see link. 
+ 
+Next, the role matrices for the base connectivity and the different network characteristics according to their roles are specified (See Book 2, Chapter 9, Section 9.4.1, and examples in Tables 9.2 to 9.4):
+ 
+1. The role matrix for base connectivity and role matrices for nonadaptive 
+    network characteristics:
+       mb      for base connectivity 
+       mcwv    for nonadaptive connection weight values 
+       msv     for nonadaptive speed factor values
+       mcfwv   for nonadaptive combination function weight values 
+       mcfpv   for nonadaptive combination function parameter values
+ 
+ 2. The role matrices for adaptive network characteristics:
+       mcwa    for adaptive connection weights 
+       msa     for adaptive speed factors
+       mcfwa   for adaptive combination function weights 
+       mcfpa   for adaptive combination function parameters
+
+
+
+mcf=[1 2 3 36 35];
+mb=[1   NaN NaN NaN NaN     %   wspf
+2   NaN NaN NaN NaN     %   wsnf
+3   NaN NaN NaN NaN     %   wss
+1   NaN NaN NaN NaN     %   sspf
+2   NaN NaN NaN NaN     %   ssnf
+3   NaN NaN NaN NaN     %   sss
+4   6   NaN NaN NaN     %   srspf
+5   6   NaN NaN NaN     %   srsnf
+9   14  50  NaN NaN     %   bs
+11  NaN NaN NaN NaN     %   pfc
+7   9   NaN NaN NaN     %   eval+
+10  11  15  19  NaN     %   striatum
+12  NaN NaN NaN NaN     %   eshappy
+9   16  NaN NaN NaN     %   flove
+16  NaN NaN NaN NaN     %   freward
+12  NaN NaN NaN NaN     %   a.insula
+9   18  NaN NaN NaN     %   cs
+8   17  50  NaN NaN     %   eval-
+18  27  28  NaN NaN     %   psact
+19  21  33  NaN NaN     %   os
+19  20  37  NaN NaN     %   esact
+13  26  NaN NaN NaN     %   wssent
+22  NaN NaN NaN NaN     %   sssent
+23  NaN NaN NaN NaN     %   srssent
+18  24  27  NaN NaN     %   pssent
+25  NaN NaN NaN NaN     %   essent
+25  NaN NaN NaN NaN     %   fssent
+29  33  NaN NaN NaN     %   val
+30  NaN NaN NaN NaN     %   fsemp
+29  33  NaN NaN NaN     %   psemp
+21  NaN NaN NaN NaN     %   wseff
+31  NaN NaN NaN NaN     %   sseff
+19  32  NaN NaN NaN     %   srseff
+37  NaN NaN NaN NaN     %   wsanx
+34  NaN NaN NaN NaN     %   ssanx
+36  NaN NaN NaN NaN     %   srsanx
+33  36  38  NaN NaN     %   psanx
+37  NaN NaN NaN NaN     %   fanx
+9   14  39  NaN NaN     %   omega_bs_flove
+9   14  40  NaN NaN     %   omega_flove_bs
+12  16  41  NaN NaN     %   omega_satrium_hipp
+12  15  42  NaN NaN     %   omega_freward_satrium
+19  33  43  NaN NaN     %   omega_psa_srspe
+19  27  44  NaN NaN     %   omega_fssent_psa
+18  19  45  NaN NaN     %   omega_eval_psa
+24  36  46  NaN NaN     %   Hsrsang,srsanx
+24  36  47  NaN NaN     %   Msrsang,srsanx
+48  NaN NaN NaN NaN     % Popularity  48
+48  NaN NaN NaN NaN     % ssPopularity  49
+49  NaN NaN NaN NaN     % srsPopularity  50
+ 
+];
+ 
+mcwa=[NaN   NaN NaN NaN NaN     %   wspf
+NaN NaN NaN NaN NaN     %   wsnf
+NaN NaN NaN NaN NaN     %   wss
+NaN NaN NaN NaN NaN     %   sspf
+NaN NaN NaN NaN NaN     %   ssnf
+NaN NaN NaN NaN NaN     %   sss
+NaN NaN NaN NaN NaN     %   srspf
+NaN NaN NaN NaN NaN     %   srsnf
+NaN 40  NaN NaN NaN     %   bs
+NaN NaN NaN NaN NaN     %   pfc
+NaN NaN NaN NaN NaN     %   eval+
+NaN NaN 42  NaN NaN     %   striatum
+NaN NaN NaN NaN NaN     %   eshappy
+39  NaN NaN NaN NaN     %   flove
+NaN NaN NaN NaN NaN     %   freward
+41  NaN NaN NaN NaN     %   a.insula
+NaN NaN NaN NaN NaN     %   cs
+NaN NaN NaN NaN NaN     %   eval-
+45  44  NaN NaN NaN     %   psact
+NaN NaN NaN NaN NaN     %   os
+NaN NaN NaN NaN NaN     %   esact
+NaN NaN NaN NaN NaN     %   wssent
+NaN NaN NaN NaN NaN     %   sssent
+NaN NaN NaN NaN NaN     %   srssent
+NaN NaN NaN NaN NaN     %   pssent
+NaN NaN NaN NaN NaN     %   essent
+NaN NaN NaN NaN NaN     %   fssent
+NaN NaN NaN NaN NaN     %   val
+NaN NaN NaN NaN NaN     %   fsemp
+NaN NaN NaN NaN NaN     %   psemp
+NaN NaN NaN NaN NaN     %   wseff
+NaN NaN NaN NaN NaN     %   sseff
+43  NaN NaN NaN NaN     %   srseff
+NaN NaN NaN NaN NaN     %   wsanx
+NaN NaN NaN NaN NaN     %   ssanx
+NaN NaN NaN NaN NaN     %   srsanx
+NaN NaN NaN NaN NaN     %   psanx
+NaN NaN NaN NaN NaN     %   fanx
+NaN NaN NaN NaN NaN     %   omega_bs_flove
+NaN NaN NaN NaN NaN     %   omega_flove_bs
+NaN NaN NaN NaN NaN     %   omega_satrium_hipp
+NaN NaN NaN NaN NaN     %   omega_freward_satrium
+NaN NaN NaN NaN NaN     %   omega_psa_srspe
+NaN NaN NaN NaN NaN     %   omega_fssent_psa
+NaN NaN NaN NaN NaN     %   omega_eval_psa
+NaN NaN NaN NaN NaN     %   Hsrsang,srsanx
+NaN NaN NaN NaN NaN     %   Msrsang,srsanx
+NaN  NaN NaN NaN NaN     % Popularity
+NaN  NaN NaN NaN NaN     % ssPopularity  49
+NaN  NaN NaN NaN NaN     % srsPopularity  50
+];
+ 
+msa=[NaN        %   wspf
+NaN     %   wsnf
+NaN     %   wss
+NaN     %   sspf
+NaN     %   ssnf
+NaN     %   sss
+NaN     %   srspf
+NaN     %   srsnf
+NaN     %   bs
+NaN     %   pfc
+NaN     %   eval+
+NaN     %   striatum
+NaN     %   eshappy
+NaN     %   flove
+NaN     %   freward
+NaN     %   a.insula
+NaN     %   cs
+NaN     %   eval-
+NaN     %   psact
+NaN     %   os
+NaN     %   esact
+NaN     %   wssent
+NaN     %   sssent
+NaN     %   srssent
+NaN     %   pssent
+NaN     %   essent
+NaN     %   fssent
+NaN     %   val
+NaN     %   fsemp
+NaN     %   psemp
+NaN     %   wseff
+NaN     %   sseff
+NaN     %   srseff
+NaN     %   wsanx
+NaN     %   ssanx
+NaN     %   srsanx
+NaN     %   psanx
+NaN     %   fanx
+NaN     %   omega_bs_flove
+NaN     %   omega_flove_bs
+NaN     %   omega_satrium_hipp
+NaN     %   omega_freward_satrium
+NaN     %   omega_psa_srspe
+46      %   omega_fssent_psa
+NaN     %   omega_eval_psa
+NaN     %   Hsrsang,srsanx
+NaN     %   Msrsang,srsanx
+NaN     % Popularity
+NaN     % ssPopularity  49
+NaN     % srsPopularity  50
+];
+ 
+mcfwa=[NaN  NaN NaN NaN NaN     %   wspf
+NaN NaN NaN NaN NaN     %   wsnf
+NaN NaN NaN NaN NaN     %   wss
+NaN NaN NaN NaN NaN     %   sspf
+NaN NaN NaN NaN NaN     %   ssnf
+NaN NaN NaN NaN NaN     %   sss
+NaN NaN NaN NaN NaN     %   srspf
+NaN NaN NaN NaN NaN     %   srsnf
+NaN NaN NaN NaN NaN     %   bs
+NaN NaN NaN NaN NaN     %   pfc
+NaN NaN NaN NaN NaN     %   eval+
+NaN NaN NaN NaN NaN     %   striatum
+NaN NaN NaN NaN NaN     %   eshappy
+NaN NaN NaN NaN NaN     %   flove
+NaN NaN NaN NaN NaN     %   freward
+NaN NaN NaN NaN NaN     %   a.insula
+NaN NaN NaN NaN NaN     %   cs
+NaN NaN NaN NaN NaN     %   eval-
+NaN NaN NaN NaN NaN     %   psact
+NaN NaN NaN NaN NaN     %   os
+NaN NaN NaN NaN NaN     %   esact
+NaN NaN NaN NaN NaN     %   wssent
+NaN NaN NaN NaN NaN     %   sssent
+NaN NaN NaN NaN NaN     %   srssent
+NaN NaN NaN NaN NaN     %   pssent
+NaN NaN NaN NaN NaN     %   essent
+NaN NaN NaN NaN NaN     %   fssent
+NaN NaN NaN NaN NaN     %   val
+NaN NaN NaN NaN NaN     %   fsemp
+NaN NaN NaN NaN NaN     %   psemp
+NaN NaN NaN NaN NaN     %   wseff
+NaN NaN NaN NaN NaN     %   sseff
+NaN NaN NaN NaN NaN     %   srseff
+NaN NaN NaN NaN NaN     %   wsanx
+NaN NaN NaN NaN NaN     %   ssanx
+NaN NaN NaN NaN NaN     %   srsanx
+NaN NaN NaN NaN NaN     %   psanx
+NaN NaN NaN NaN NaN     %   fanx
+NaN NaN NaN NaN NaN     %   omega_bs_flove
+NaN NaN NaN NaN NaN     %   omega_flove_bs
+NaN NaN NaN NaN NaN     %   omega_satrium_hipp
+NaN NaN NaN NaN NaN     %   omega_freward_satrium
+NaN NaN NaN NaN NaN     %   omega_psa_srspe
+NaN NaN NaN NaN NaN     %   omega_fssent_psa
+NaN NaN NaN NaN NaN     %   omega_eval_psa
+NaN NaN NaN NaN NaN     %   Hsrsang,srsanx
+NaN NaN NaN NaN NaN     %   Msrsang,srsanx
+NaN NaN NaN NaN NaN     % Popularity
+NaN NaN NaN NaN NaN     % ssPopularity  49
+NaN NaN NaN NaN NaN     % srsPopularity  50
+];
+ 
+mcfpa=cat(3,[NaN    NaN %   wspf
+NaN NaN %   wsnf
+NaN NaN %   wss
+NaN NaN %   sspf
+NaN NaN %   ssnf
+NaN NaN %   sss
+NaN NaN %   srspf
+NaN NaN %   srsnf
+NaN NaN %   bs
+NaN NaN %   pfc
+NaN NaN %   eval+
+NaN NaN %   striatum
+NaN NaN %   eshappy
+NaN NaN %   flove
+NaN NaN %   freward
+NaN NaN %   a.insula
+NaN NaN %   cs
+NaN NaN %   eval-
+NaN NaN %   psact
+NaN NaN %   os
+NaN NaN %   esact
+NaN NaN %   wssent
+NaN NaN %   sssent
+NaN NaN %   srssent
+NaN NaN %   pssent
+NaN NaN %   essent
+NaN NaN %   fssent
+NaN NaN %   val
+NaN NaN %   fsemp
+NaN NaN %   psemp
+NaN NaN %   wseff
+NaN NaN %   sseff
+NaN NaN %   srseff
+NaN NaN %   wsanx
+NaN NaN %   ssanx
+NaN NaN %   srsanx
+NaN NaN %   psanx
+NaN NaN %   fanx
+NaN NaN %   omega_bs_flove
+NaN NaN %   omega_flove_bs
+NaN NaN %   omega_satrium_hipp
+NaN NaN %   omega_freward_satrium
+NaN NaN %   omega_psa_srspe
+NaN NaN %   omega_fssent_psa
+NaN NaN %   omega_eval_psa
+NaN NaN %   Hsrsang,srsanx
+NaN NaN %   Msrsang,srsanx
+NaN NaN     % Popularity
+NaN NaN   % ssPopularity  49
+NaN NaN   % srsPopularity  50
+],[NaN  NaN %   wspf
+NaN NaN %   wsnf
+NaN NaN %   wss
+NaN NaN %   sspf
+NaN NaN %   ssnf
+NaN NaN %   sss
+NaN NaN %   srspf
+NaN NaN %   srsnf
+NaN NaN %   bs
+NaN NaN %   pfc
+NaN NaN %   eval+
+NaN NaN %   striatum
+NaN NaN %   eshappy
+NaN NaN %   flove
+NaN NaN %   freward
+NaN NaN %   a.insula
+NaN NaN %   cs
+NaN NaN %   eval-
+NaN NaN %   psact
+NaN NaN %   os
+NaN NaN %   esact
+NaN NaN %   wssent
+NaN NaN %   sssent
+NaN NaN %   srssent
+NaN NaN %   pssent
+NaN NaN %   essent
+NaN NaN %   fssent
+NaN NaN %   val
+NaN NaN %   fsemp
+NaN NaN %   psemp
+NaN NaN %   wseff
+NaN NaN %   sseff
+NaN NaN %   srseff
+NaN NaN %   wsanx
+NaN NaN %   ssanx
+NaN NaN %   srsanx
+NaN NaN %   psanx
+NaN NaN %   fanx
+NaN NaN %   omega_bs_flove
+NaN NaN %   omega_flove_bs
+NaN NaN %   omega_satrium_hipp
+NaN NaN %   omega_freward_satrium
+NaN NaN %   omega_psa_srspe
+NaN NaN %   omega_fssent_psa
+NaN NaN %   omega_eval_psa
+NaN NaN %   Hsrsang,srsanx
+NaN NaN %   Msrsang,srsanx
+NaN NaN     % Popularity
+NaN  NaN   % ssPopularity  49
+NaN  NaN   % srsPopularity  50
+],[NaN  NaN %   wspf
+NaN NaN %   wsnf
+NaN NaN %   wss
+NaN NaN %   sspf
+NaN NaN %   ssnf
+NaN NaN %   sss
+NaN NaN %   srspf
+NaN NaN %   srsnf
+NaN NaN %   bs
+NaN NaN %   pfc
+NaN NaN %   eval+
+NaN NaN %   striatum
+NaN NaN %   eshappy
+NaN NaN %   flove
+NaN NaN %   freward
+NaN NaN %   a.insula
+NaN NaN %   cs
+NaN NaN %   eval-
+NaN NaN %   psact
+NaN NaN %   os
+NaN NaN %   esact
+NaN NaN %   wssent
+NaN NaN %   sssent
+NaN NaN %   srssent
+NaN NaN %   pssent
+NaN NaN %   essent
+NaN NaN %   fssent
+NaN NaN %   val
+NaN NaN %   fsemp
+NaN NaN %   psemp
+NaN NaN %   wseff
+NaN NaN %   sseff
+NaN NaN %   srseff
+NaN NaN %   wsanx
+NaN NaN %   ssanx
+NaN NaN %   srsanx
+NaN NaN %   psanx
+NaN NaN %   fanx
+NaN NaN %   omega_bs_flove
+NaN NaN %   omega_flove_bs
+NaN NaN %   omega_satrium_hipp
+NaN NaN %   omega_freward_satrium
+NaN NaN %   omega_psa_srspe
+47  NaN %   omega_fssent_psa
+NaN NaN %   omega_eval_psa
+NaN NaN %   Hsrsang,srsanx
+NaN NaN %   Msrsang,srsanx
+NaN NaN     % Popularity
+NaN NaN  % ssPopularity  49
+NaN NaN    % srsPopularity  50
+],[NaN  NaN %   wspf
+NaN NaN %   wsnf
+NaN NaN %   wss
+NaN NaN %   sspf
+NaN NaN %   ssnf
+NaN NaN %   sss
+NaN NaN %   srspf
+NaN NaN %   srsnf
+NaN NaN %   bs
+NaN NaN %   pfc
+NaN NaN %   eval+
+NaN NaN %   striatum
+NaN NaN %   eshappy
+NaN NaN %   flove
+NaN NaN %   freward
+NaN NaN %   a.insula
+NaN NaN %   cs
+NaN NaN %   eval-
+NaN NaN %   psact
+NaN NaN %   os
+NaN NaN %   esact
+NaN NaN %   wssent
+NaN NaN %   sssent
+NaN NaN %   srssent
+NaN NaN %   pssent
+NaN NaN %   essent
+NaN NaN %   fssent
+NaN NaN %   val
+NaN NaN %   fsemp
+NaN NaN %   psemp
+NaN NaN %   wseff
+NaN NaN %   sseff
+NaN NaN %   srseff
+NaN NaN %   wsanx
+NaN NaN %   ssanx
+NaN NaN %   srsanx
+NaN NaN %   psanx
+NaN NaN %   fanx
+NaN NaN %   omega_bs_flove
+NaN NaN %   omega_flove_bs
+NaN NaN %   omega_satrium_hipp
+NaN NaN %   omega_freward_satrium
+NaN NaN %   omega_psa_srspe
+NaN NaN %   omega_fssent_psa
+NaN NaN %   omega_eval_psa
+NaN NaN %   Hsrsang,srsanx
+NaN NaN %   Msrsang,srsanx
+NaN NaN     % Popularity
+NaN NaN    % ssPopularity  49
+NaN NaN    % srsPopularity  50
+],[NaN  NaN %   wspf
+NaN NaN %   wsnf
+NaN NaN %   wss
+NaN NaN %   sspf
+NaN NaN %   ssnf
+NaN NaN %   sss
+NaN NaN %   srspf
+NaN NaN %   srsnf
+NaN NaN %   bs
+NaN NaN %   pfc
+NaN NaN %   eval+
+NaN NaN %   striatum
+NaN NaN %   eshappy
+NaN NaN %   flove
+NaN NaN %   freward
+NaN NaN %   a.insula
+NaN NaN %   cs
+NaN NaN %   eval-
+NaN NaN %   psact
+NaN NaN %   os
+NaN NaN %   esact
+NaN NaN %   wssent
+NaN NaN %   sssent
+NaN NaN %   srssent
+NaN NaN %   pssent
+NaN NaN %   essent
+NaN NaN %   fssent
+NaN NaN %   val
+NaN NaN %   fsemp
+NaN NaN %   psemp
+NaN NaN %   wseff
+NaN NaN %   sseff
+NaN NaN %   srseff
+NaN NaN %   wsanx
+NaN NaN %   ssanx
+NaN NaN %   srsanx
+NaN NaN %   psanx
+NaN NaN %   fanx
+NaN NaN %   omega_bs_flove
+NaN NaN %   omega_flove_bs
+NaN NaN %   omega_satrium_hipp
+NaN NaN %   omega_freward_satrium
+NaN NaN %   omega_psa_srspe
+NaN NaN %   omega_fssent_psa
+NaN NaN %   omega_eval_psa
+NaN NaN %   Hsrsang,srsanx
+NaN NaN %   Msrsang,srsanx
+NaN NaN     % Popularity
+NaN NaN    % ssPopularity  49
+NaN NaN    % srsPopularity  50
+]);
+ 
+mcwv=[1 NaN NaN NaN NaN     %   wspf
+1   NaN NaN NaN NaN     %   wsnf
+1   NaN NaN NaN NaN     %   wss
+0.8 NaN NaN NaN NaN     %   sspf
+0.8 NaN NaN NaN NaN     %   ssnf
+0.8 NaN NaN NaN NaN     %   sss
+0.9 0.15    NaN NaN NaN     %   srspf
+0.9 0.15    NaN NaN NaN     %   srsnf
+0.4 1   NaN NaN NaN     %   bs
+0.4 NaN NaN NaN NaN     %   pfc
+0.7 0.3 -0.5    NaN NaN     %   eval+
+0.2 0.3 NaN -0.4    NaN     %   striatum
+0.8 NaN NaN NaN NaN     %   eshappy
+NaN 0.3 NaN NaN NaN     %   flove
+0.5 NaN NaN NaN NaN     %   freward
+NaN NaN NaN NaN NaN     %   a.insula
+0.01    0.8 NaN NaN NaN     %   cs
+0.9 -0.2    -0.5    NaN NaN     %   eval- 
+NaN NaN 0.1 NaN NaN     %   psact
+0.8 0.4 0.5 NaN NaN     %   os
+0.9 0.3 0.2 NaN NaN     %   esact
+-0.4    0.8 NaN NaN NaN     %   wssent
+0.8 NaN NaN NaN NaN     %   sssent
+0.8 NaN NaN NaN NaN     %   srssent
+0.4 0.1 0.1 NaN NaN     %   pssent
+0.8 NaN NaN NaN NaN     %   essent
+0.7 NaN NaN NaN NaN     %   fssent
+-0.3 0.3 NaN    NaN NaN     %   val
+0.2 NaN NaN NaN NaN     %   fsemp
+0.2 0.1 NaN NaN NaN     %   psemp
+0.3 NaN NaN NaN NaN     %   wseff
+0.3 NaN NaN NaN NaN     %   sseff
+NaN 0.3 NaN NaN NaN     %   srseff
+0.8 NaN NaN NaN NaN     %   wsanx
+0.8 NaN NaN NaN NaN     %   ssanx
+0.8 NaN NaN NaN NaN     %   srsanx
+0.7 0.6 0.4 NaN NaN     %   psanx
+0.8 NaN NaN NaN NaN     %   fanx
+1   1   1   NaN NaN     %   omega_bs_flove
+1   1   1   NaN NaN     %   omega_flove_bs
+1   1   1   NaN NaN     %   omega_satrium_hipp
+1   1   1   NaN NaN     %   omega_freward_satrium
+1   1   1   NaN NaN     %   omega_psa_srspe
+1   1   1   NaN NaN     %   omega_fssent_psa
+1   1   1   NaN NaN     %   omega_eval_psa
+0.8     0.4     1   NaN nan     %   Hsrsang,srsanx
+-0.1    -0.1    1   NaN NaN     %   Msrsang,srsanx
+1  NaN NaN NaN NaN     % Popularity
+0.9  NaN NaN NaN NaN     % ssPopularity  49
+0.8  NaN NaN NaN NaN     % srsPopularity  50
+];
+ 
+mcfwv=[NaN  NaN NaN 1   NaN     %   wspf
+NaN NaN NaN NaN 1       %   wsnf
+1   NaN NaN NaN NaN     %   wss
+1   NaN NaN NaN NaN     %   sspf
+NaN 1   NaN NaN NaN     %   ssnf
+1   NaN NaN NaN NaN     %   sss
+1   NaN NaN NaN NaN     %   srspf
+NaN 1   NaN NaN NaN     %   srsnf
+NaN 1   NaN NaN NaN     %   bs
+1   NaN NaN NaN NaN     %   pfc
+1   NaN NaN NaN NaN     %   eval+
+NaN 1   NaN NaN NaN     %   striatum
+1   NaN NaN NaN NaN     %   eshappy
+NaN 1   NaN NaN NaN     %   flove
+NaN 1   NaN NaN NaN     %   freward
+NaN 1   NaN NaN NaN     %   a.insula
+NaN 1   NaN NaN NaN     %   cs
+NaN 1   NaN NaN NaN     %   eval-
+NaN 1   NaN NaN NaN     %   psact
+1   NaN NaN NaN NaN     %   os
+1   NaN NaN NaN NaN     %   esact
+NaN 1   NaN NaN NaN     %   wssent
+1   NaN NaN NaN NaN     %   sssent
+1   NaN NaN NaN NaN     %   srssent
+NaN 1   NaN NaN NaN     %   pssent
+1   NaN NaN NaN NaN     %   essent
+NaN 1   NaN NaN NaN     %   fssent
+NaN 1   NaN NaN NaN     %   val
+1   NaN NaN NaN NaN     %   fsemp
+NaN 1   NaN NaN NaN     %   psemp
+1   NaN NaN NaN NaN     %   wseff
+1   NaN NaN NaN NaN     %   sseff
+NaN 1   NaN NaN NaN     %   srseff
+1   NaN NaN NaN NaN     %   wsanx
+1   NaN NaN NaN NaN     %   ssanx
+1   NaN NaN NaN NaN     %   srsanx
+1   NaN NaN NaN NaN     %   psanx
+1   NaN NaN NaN NaN     %   fanx
+NaN NaN 1   NaN NaN     %   omega_bs_flove
+NaN NaN 1   NaN NaN     %   omega_flove_bs
+NaN NaN 1   NaN NaN     %   omega_satrium_hipp
+NaN NaN 1   NaN NaN     %   omega_freward_satrium
+NaN NaN 1   NaN NaN     %   omega_psa_srspe
+NaN NaN 1   NaN NaN     %   omega_fssent_psa
+NaN NaN 1   NaN NaN     %   omega_eval_psa
+NaN 1   NaN NaN NaN     %   Hsrsang,srsanx
+NaN 1   NaN NaN NaN     %   Msrsang,srsanx
+NaN  NaN NaN NaN 1     % Popularity
+1  NaN NaN NaN NaN     % ssPopularity  49
+NaN  1 NaN NaN NaN     % srsPopularity  50
+]; 
+ 
+mcfpv = cat(3,[NaN  NaN %   wspf
+NaN NaN %   wsnf
+1   1   %   wss
+1   0.8 %   sspf
+NaN NaN %   ssnf
+1   0.8 %   sss
+2   0.8325  %   srspf
+NaN NaN %   srsnf
+NaN NaN %   bs
+1   0.4 %   pfc
+2   0.94    %   eval+
+NaN NaN %   striatum
+1   0.8 %   eshappy
+NaN NaN %   flove
+NaN NaN %   freward
+NaN NaN %   a.insula
+NaN NaN %   cs
+NaN NaN %   eval-
+NaN NaN %   psact
+1   1.7 %   os
+1   1.4 %   esact
+NaN NaN %   wssent
+1   0.8 %   sssent
+1   0.8 %   srssent
+NaN NaN %   pssent
+1   0.8 %   essent
+NaN NaN %   fssent
+NaN NaN %   val
+1   0.2 %   fsemp
+NaN NaN %   psemp
+1   0.3 %   wseff
+1   0.3 %   sseff
+NaN NaN %   srseff
+1   0.8 %   wsanx
+1   0.8 %   ssanx
+1   0.8 %   srsanx
+1   1.7 %   psanx
+1   0.8 %   fanx
+NaN NaN %   omega_bs_flove
+NaN NaN %   omega_flove_bs
+NaN NaN %   omega_satrium_hipp
+NaN NaN %   omega_freward_satrium
+NaN NaN %   omega_psa_srspe
+NaN NaN %   omega_fssent_psa
+NaN NaN %   omega_eval_psa
+NaN NaN %   Hsrsang,srsanx
+NaN NaN %   Msrsang,srsanx
+NaN NaN % Popularity
+1 0.9     % ssPopularity  49
+NaN NaN   % srsPopularity  50
+],[NaN  NaN %   wspf
+NaN NaN %   wsnf
+NaN NaN %   wss
+NaN NaN %   sspf
+10  0.3 %   ssnf
+NaN NaN %   sss
+NaN NaN %   srspf
+30  0.6 %   srsnf
+10  0.32 %  bs
+NaN NaN %   pfc
+NaN NaN %   eval+
+3   0.6 %   striatum
+NaN NaN %   eshappy
+3   0.6 %   flove
+3   0.2 %   freward
+3   0.2 %   a.insula
+10  0.5 %   cs
+10  0.3 %   eval-
+3   0.4 %   psact 3 0.3
+NaN NaN %   os
+NaN NaN %   esact
+10  0.4 %   wssent
+NaN NaN %   sssent
+NaN NaN %   srssent
+10  0.4 %   pssent
+NaN NaN %   essent
+10  0.2 %   fssent
+10  0.2 %   val
+NaN NaN %   fsemp
+3   0.3 %   psemp
+NaN NaN %   wseff
+NaN NaN %   sseff
+10  0.45    %   srseff
+NaN NaN %   wsanx
+NaN NaN %   ssanx
+NaN NaN %   srsanx
+NaN NaN %   psanx
+NaN NaN %   fanx
+NaN NaN %   omega_bs_flove
+NaN NaN %   omega_flove_bs
+NaN NaN %   omega_satrium_hipp
+NaN NaN %   omega_freward_satrium
+NaN NaN %   omega_psa_srspe
+NaN NaN %   omega_fssent_psa
+NaN NaN %   omega_eval_psa
+3   0.06    %   Hsrsang,srsanx
+3   0.05    %   Msrsang,srsanx
+NaN NaN     % Popularity
+NaN NaN     % ssPopularity  49
+10 0.6   % srsPopularity  50
+],[NaN  NaN %   wspf
+NaN NaN %   wsnf
+NaN NaN %   wss
+NaN NaN %   sspf
+NaN NaN %   ssnf
+NaN NaN %   sss
+NaN NaN %   srspf
+NaN NaN %   srsnf
+NaN NaN %   bs
+NaN NaN %   pfc
+NaN NaN %   eval+
+NaN NaN %   striatum
+NaN NaN %   eshappy
+NaN NaN %   flove
+NaN NaN %   freward
+NaN NaN %   a.insula
+NaN NaN %   cs
+NaN NaN %   eval-
+NaN NaN %   psact
+NaN NaN %   os
+NaN NaN %   esact
+NaN NaN %   wssent
+NaN NaN %   sssent
+NaN NaN %   srssent
+NaN NaN %   pssent
+NaN NaN %   essent
+NaN NaN %   fssent
+NaN NaN %   val
+NaN NaN %   fsemp
+NaN NaN %   psemp
+NaN NaN %   wseff
+NaN NaN %   sseff
+NaN NaN %   srseff
+NaN NaN %   wsanx
+NaN NaN %   ssanx
+NaN NaN %   srsanx
+NaN NaN %   psanx
+NaN NaN %   fanx
+1   NaN %   omega_bs_flove
+1   NaN %   omega_flove_bs
+1   NaN %   omega_satrium_hipp
+1   NaN %   omega_freward_satrium
+0.7 NaN %   omega_psa_srspe
+NaN NaN %   omega_fssent_psa
+1   NaN %   omega_eval_psa
+NaN NaN %   Hsrsang,srsanx
+NaN NaN %   Msrsang,srsanx
+NaN NaN     % Popularity
+NaN NaN     % ssPopularity  49
+NaN NaN   % srsPopularity  50
+],[200  100 %   wspf
+NaN NaN %   wsnf
+NaN NaN %   wss
+NaN NaN %   sspf
+NaN NaN %   ssnf
+NaN NaN %   sss
+NaN NaN %   srspf
+NaN NaN %   srsnf
+NaN NaN %   bs
+NaN NaN %   pfc
+NaN NaN %   eval+
+NaN NaN %   striatum
+NaN NaN %   eshappy
+NaN NaN %   flove
+NaN NaN %   freward
+NaN NaN %   a.insula
+NaN NaN %   cs
+NaN NaN %   eval-
+NaN NaN %   psact
+NaN NaN %   os
+NaN NaN %   esact
+NaN NaN %   wssent
+NaN NaN %   sssent
+NaN NaN %   srssent
+NaN NaN %   pssent
+NaN NaN %   essent
+NaN NaN %   fssent
+NaN NaN %   val
+NaN NaN %   fsemp
+NaN NaN %   psemp
+NaN NaN %   wseff
+NaN NaN %   sseff
+NaN NaN %   srseff
+NaN NaN %   wsanx
+NaN NaN %   ssanx
+NaN NaN %   srsanx
+NaN NaN %   psanx
+NaN NaN %   fanx
+NaN NaN %   omega_bs_flove
+NaN NaN %   omega_flove_bs
+NaN NaN %   omega_satrium_hipp
+NaN NaN %   omega_freward_satrium
+NaN NaN %   omega_psa_srspe
+NaN NaN %   omega_fssent_psa
+NaN NaN %   omega_eval_psa
+NaN NaN %   Hsrsang,srsanx
+NaN NaN %   Msrsang,srsanx
+NaN NaN     % Popularity
+NaN NaN     % ssPopularity  49
+NaN NaN   % srsPopularity  50
+],[NaN  NaN %   wspf
+200 100 %   wsnf
+NaN NaN %   wss
+NaN NaN %   sspf
+NaN NaN %   ssnf
+NaN NaN %   sss
+NaN NaN %   srspf
+NaN NaN %   srsnf
+NaN NaN %   bs
+NaN NaN %   pfc
+NaN NaN %   eval+
+NaN NaN %   striatum
+NaN NaN %   eshappy
+NaN NaN %   flove
+NaN NaN %   freward
+NaN NaN %   a.insula
+NaN NaN %   cs
+NaN NaN %   eval-
+NaN NaN %   psact
+NaN NaN %   os
+NaN NaN %   esact
+NaN NaN %   wssent
+NaN NaN %   sssent
+NaN NaN %   srssent
+NaN NaN %   pssent
+NaN NaN %   essent
+NaN NaN %   fssent
+NaN NaN %   val
+NaN NaN %   fsemp
+NaN NaN %   psemp
+NaN NaN %   wseff
+NaN NaN %   sseff
+NaN NaN %   srseff
+NaN NaN %   wsanx
+NaN NaN %   ssanx
+NaN NaN %   srsanx
+NaN NaN %   psanx
+NaN NaN %   fanx
+NaN NaN %   omega_bs_flove
+NaN NaN %   omega_flove_bs
+NaN NaN %   omega_satrium_hipp
+NaN NaN %   omega_freward_satrium
+NaN NaN %   omega_psa_srspe
+NaN NaN %   omega_fssent_psa
+NaN NaN %   omega_eval_psa
+NaN NaN %   Hsrsang,srsanx
+NaN NaN %   Msrsang,srsanx
+2000 450     % Popularity
+NaN NaN     % ssPopularity  49
+NaN NaN   % srsPopularity  50
+]);
+ 
+msv=[1      %   wspf
+1       %   wsnf
+1       %   wss
+0.6     %   sspf
+0.6     %   ssnf
+0.6     %   sss
+0.6     %   srspf
+0.2     %   srsnf
+0.01        %   bs
+0.6     %   pfc
+0.6     %   eval+
+0.6     %   striatum
+0.6     %   eshappy
+0.3     %   flove
+0.6     %   freward
+0.8     %   a.insula
+1       %   cs
+0.3     %   eval-
+0.8     %   psact 
+1       %   os
+0.04    %   esact
+0.6     %   wssent 
+0.6     %   sssent
+0.6     %   srssent
+0.5     %   pssent
+0.8     %   essent
+0.8     %   fssent
+0.1     %   val
+0.6     %   fsemp
+0.6     %   psemp
+0.6     %   wseff
+0.6     %   sseff
+0.8     %   srseff
+0.6     %   wsanx
+0.6     %   ssanx
+0.6     %   srsanx
+0.6     %   psanx
+0.6     %   fanx
+0.1     %   omega_bs_flove
+0.001       %   omega_flove_bs
+0.2     %   omega_satrium_hipp
+0.2     %   omega_freward_satrium
+0.05        %   omega_psa_srspe
+NaN     %   omega_fssent_psa
+0.01        %   omega_eval_psa
+0.4     %   Hsrsang,srsanx
+0.1     %   Msrsang,srsanx
+0.008     % Popularity .01 works good
+0.05     % ssPopularity  49
+0.05  % srsPopularity  50
+];
+ 
+iv = [1     %   wspf
+0       %   wsnf
+1       %   wss
+0       %   sspf
+0       %   ssnf
+0       %   sss
+0       %   srspf
+0       %   srsnf
+0.6     %   bs
+0       %   pfc
+0       %   eval+
+0       %   striatum
+0       %   eshappy
+0       %   flove
+0       %   freward
+0       %   a.insula
+0       %   cs
+0       %   eval-
+0       %   psact
+0       %   os
+0       %   esact
+0       %   wssent
+0       %   sssent
+0       %   srssent
+0       %   pssent
+0       %   essent
+0       %   fssent
+0       %   val
+0       %   fsemp
+0       %   psemp
+0       %   wseff
+0       %   sseff
+0       %   srseff
+0       %   wsanx
+0       %   ssanx
+0       %   srsanx
+0       %   psanx
+0       %   fanx
+0.5     %   omega_bs_flove
+0.5     %   omega_flove_bs
+0.5     %   omega_satrium_hipp
+0.6     %   omega_freward_satrium
+0.1     %   omega_psa_srspe
+0.1 %   omega_fssent_psa
+0.2     %   omega_eval_psa
+0.2     %   Hsrsang,srsanx
+0.6     %   Msrsang,srsanx
+0     % Popularity
+0     % ssPopularity  49
+0   % srsPopularity  50
+];
